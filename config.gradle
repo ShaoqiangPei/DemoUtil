@@ -1,0 +1,56 @@
+/**
+ * 在主项目的根目录下创建config.gradle文件 
+ * 在这里单独处理统一依赖问题 
+ * 注意需要在根目录的build.gradle中进行引入
+ */
+ext {
+    android = [
+            //编译的SDK版本  
+            compileSdkVersion: 28,
+
+            //项目id
+            applicationId:"com.demoutil",
+            //支持SDK的最低版本  
+            minSdkVersion    : 19,
+            //支持SDK的目标版本 
+            targetSdkVersion : 28,
+            //编译的Tools版本  
+            buildToolsVersion: "28.0.3",
+            //版本号
+            versionCode:1,
+            //版本名称
+            versionName:"1.0.0",
+
+            testInstrumentationRunner:"android.support.test.runner.AndroidJUnitRunner"
+    ]
+
+    //依赖库版本
+    supportLibrary = "28.0.0"
+    //库依赖
+    supportDependencies = [
+            //基础库
+            implementation_support_appcompat: "com.android.support:appcompat-v7:${supportLibrary}",
+            implementation_support_v4       : "com.android.support:support-v4:${supportLibrary}",
+            implementation_suppout_design   : "com.android.support:design:${supportLibrary}",
+            implementation_recyclerview_v7:"com.android.support:recyclerview-v7:${supportLibrary}",
+            implementation_constraint_layout:"com.android.support.constraint:constraint-layout:1.1.3",
+            testImplementation_test_junit:"junit:junit:4.12",
+            androidTestImplementation_support_runner:"com.android.support.test:runner:1.0.2",
+            androidTestImplementation_support_espresso:"com.android.support.test.espresso:espresso-core:3.0.2",
+
+            //butterKnife
+            implementation_butterknife     : "com.jakewharton:butterknife:8.5.1",
+            //这条千万不能忘记!!,引用方式：annotationProcessor librarys.butterknifeCompiler
+            annotationProcessor_butterknife_compiler:"com.jakewharton:butterknife-compiler:8.5.1",
+
+            //PermissionGen
+            compile_permissionenGen:"com.lovedise:permissiongen:0.0.6",
+
+            //selector框架
+            compile_DevShapeUtils:"com.github.LiangLuDev:DevShapeUtils:1.0.1",
+
+            //loadingdialog,网络加载对话框
+            compile_loading_dialog:"com.github.d-max:spots-dialog:0.7@aar",
+    ]
+
+}

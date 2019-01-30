@@ -1,15 +1,22 @@
 apply plugin: 'com.android.application'
 
+//android配置
+def config = rootProject.ext.android
+//相关库依赖
+def librarys = rootProject.ext.supportDependencies
+
 android {
-    compileSdkVersion 28
+
+    compileSdkVersion config.compileSdkVersion
     defaultConfig {
-        applicationId "com.demoutil"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner config.testInstrumentationRunner
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -20,10 +27,18 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //基础库
+    implementation librarys.implementation_support_appcompat
+    implementation librarys.implementation_support_v4
+    implementation librarys.implementation_suppout_design
+    implementation librarys.implementation_recyclerview_v7
+    implementation librarys.implementation_constraint_layout
+    testImplementation librarys.testImplementation_test_junit
+    androidTestImplementation librarys.androidTestImplementation_support_runner
+    androidTestImplementation librarys.androidTestImplementation_support_espresso
     implementation project(':lib')
+    //==========第三方========
+    //butterknife
+    implementation librarys.implementation_butterknife
+    annotationProcessor librarys.annotationProcessor_butterknife_compiler
 }

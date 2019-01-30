@@ -1,18 +1,22 @@
 apply plugin: 'com.android.library'
 
+//引用butterknife
+apply plugin: 'com.jakewharton.butterknife'
+
+//android配置
+def config = rootProject.ext.android
+//相关库依赖
+def librarys = rootProject.ext.supportDependencies
+
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion config.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner config.testInstrumentationRunner
     }
 
     buildTypes {
@@ -22,13 +26,55 @@ android {
         }
     }
 
+//==========以下添加是为了让自己的库发布到JitPack上仍能显示注释==================
+    // 打包源码jar
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+    //编译groovy代码时采用 UTF-8
+    tasks.withType(GroovyCompile) {
+        groovyOptions.encoding = "MacRoman"
+    }
+
+    //编译JAVA文件时采用UTF-8
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    task javadoc(type: Javadoc) {
+        failOnError false
+        source = android.sourceSets.main.java.sourceFiles
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        classpath += configurations.compile
+    }
+
+    // 打包文档jar
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
+    }
+//==========以上添加是为了让自己的库发布到JitPack上仍能显示注释==================
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //基础库
+    implementation librarys.implementation_support_appcompat
+    implementation librarys.implementation_support_v4
+    implementation librarys.implementation_suppout_design
+    implementation librarys.implementation_recyclerview_v7
+    implementation librarys.implementation_constraint_layout
+    testImplementation librarys.testImplementation_test_junit
+    androidTestImplementation librarys.androidTestImplementation_support_runner
+    androidTestImplementation librarys.androidTestImplementation_support_espresso
+    //==========第三方========
+    //butterknife
+    implementation librarys.implementation_butterknife
+    annotationProcessor librarys.annotationProcessor_butterknife_compiler
 }
