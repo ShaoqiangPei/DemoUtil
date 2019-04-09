@@ -16,3 +16,21 @@ dependencies {
 	        implementation 'com.github.ShaoqiangPei:DemoUtil:1.0.0'
 	}
 ```
+在你项目的 app_moduel 中自定义一个application,继承于 ComContext,类似如下：
+```
+public class AppContext extends ComContext{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+}
+```
+在 mainfast.xml 中声明此 application 类，类似如下：
+```
+    <application
+        android:name="com.app.AppContext"
+	//以下省略
+	//...... />
+```
