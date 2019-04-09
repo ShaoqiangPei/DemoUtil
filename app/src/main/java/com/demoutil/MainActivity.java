@@ -3,6 +3,9 @@ package com.demoutil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.util.LogUtil;
+import com.util.ToastUtil;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -10,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LogUtil.i();
+        LogUtil.setDebug(true);
+        LogUtil.i("=======kk=======");
+        ToastUtil.shortShow("=====kk======");
     }
 }
