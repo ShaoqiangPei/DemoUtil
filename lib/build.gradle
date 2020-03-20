@@ -30,6 +30,12 @@ android {
         }
     }
 
+    // 注意：这是解决java_1.8声明的关键点。
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
 //==========以下添加是为了让自己的库发布到JitPack上仍能显示注释==================
     // 打包源码jar
     task sourcesJar(type: Jar) {
@@ -81,4 +87,7 @@ dependencies {
     //butterknife
     implementation librarys.implementation_butterknife
     annotationProcessor librarys.annotationProcessor_butterknife_compiler
+
+    //权限库
+    api librarys.api_permissionenGen
 }

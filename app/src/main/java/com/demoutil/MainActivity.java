@@ -1,12 +1,17 @@
 package com.demoutil;
 
-import android.support.v7.app.AppCompatActivity;
+import android.Manifest;
 import android.os.Bundle;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.permision.PermissionHelper;
 import com.util.LogUtil;
-import com.util.ToastUtil;
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionSuccess;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,5 +21,9 @@ public class MainActivity extends AppCompatActivity {
 //        LogUtil.setDebug(true);
 //        LogUtil.i("=======kk=======");
 //        ToastUtil.shortShow("=====kk======");
+
+
     }
+
+
 }

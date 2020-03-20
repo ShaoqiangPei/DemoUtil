@@ -8,12 +8,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
-        //避免butterKnife在library中使用出现id冲突
-        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
+		classpath 'com.android.tools.build:gradle:3.5.1'//此处版本改为自己项目中的gradle插件版本
 
         //添加jitpack发布相关配置
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        //避免butterKnife在library中使用出现id冲突
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc2'
     }
 }
 
