@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 //        LogUtil.setDebug(true);
 //        LogUtil.i("=======kk=======");
 //        ToastUtil.shortShow("=====kk======");
+        //我是测试
 
 
     }
